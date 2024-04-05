@@ -1,0 +1,21 @@
+﻿@model CusSupApp.Models.Ticket
+
+<h2>Create Ticket</h2>
+
+<form asp-action="CreateTicket" method="post">
+    <div class="form-group">
+        <label asp-for="Description" class="control-label">Description</label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Deadline" class="control-label">Deadline</label>
+        <input asp-for="Deadline" class="form-control" type="datetime-local" />
+        <span asp-validation-for="Deadline" class="text-danger"></span>
+    </div>
+
+    <div class="form-group" style="margin-top: 1rem;">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>

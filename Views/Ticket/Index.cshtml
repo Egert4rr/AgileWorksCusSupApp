@@ -1,0 +1,40 @@
+﻿@model List<CusSupApp.Models.Ticket>
+@{
+    List<CusSupApp.Models.Ticket> ticketList = Model;
+}
+
+
+<h1>Active Tickets</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>Entry Time</th>
+            <th>Deadline</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ticket in ticketList) {
+            string truncatedDescription = ticket.Description.Length > 26 ? ticket.Description.Substring(0, 26) + "..." : ticket.Description;
+            
+            // Calculate time remaining until deadline
+            TimeSpan timeRemaining = ticket.Deadline - DateTime.Now;
+            bool isDeadlineSoon = timeRemaining.TotalHours < 1 && timeRemaining.TotalHours >= 0;
+            bool isOverdue = timeRemaining.TotalHours < 0;
+
+            <tr style="background-color: @(isDeadlineSoon || isOverdue ? "#ffe6e6" : "inherit")">
+                <td>@truncatedDescription</td>
+                <td>@ticket.EntryTime.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>@ticket.Deadline.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>
+                    @if (!ticket.IsResolved)
+                    {
+                        <a href="@Url.Action("Resolve", "Ticket", new { id = ticket.Id })" style="text-decoration: none; color: blue">Active</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
