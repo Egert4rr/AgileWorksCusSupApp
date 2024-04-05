@@ -1,5 +1,5 @@
 To run the App simply open a terminal in the project folder and run "dotnet run".
-once the project is up the terminal will display the port its running on.
+Once the project is up the terminal will display the port its running on.
 
 CREATING A TICKET:
 1. Click on "Create Ticket" on the navigation bar
